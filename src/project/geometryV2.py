@@ -18,10 +18,9 @@ class MainMenu(tk.Frame):
 class Square(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.configure(bg="cyan")
 
         def calculate():
-            var = int(num1.get())
+            var = float(num1.get())
             result1 = var ** 3
             result2 = var * 4
             resArea.config(text=result1)
