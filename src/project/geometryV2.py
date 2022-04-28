@@ -1,5 +1,7 @@
 import tkinter as tk
 
+# koordinat tengah x = 350, y = 200
+
 class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -12,6 +14,41 @@ class MainMenu(tk.Frame):
         buttonCalc.pack()
         buttonFormula.pack()
         buttonGames.pack()
+
+class Square(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.configure(bg="cyan")
+
+        def calculate():
+            var = int(num1.get())
+            result1 = var ** 3
+            result2 = var * 4
+            resArea.config(text=result1)
+            resCircum.config(text=result2)
+
+        labelMain = tk.Label(self, text="Square Calculator")
+        sisi = tk.Label(self, text="Input Side legth: ")
+        num1 = tk.Entry(self)
+        area = tk.Label(self, text="Area: ")
+        circum = tk.Label(self, text="Circumfence leghth: ")
+        resArea = tk.Label(self)
+        resCircum = tk.Label(self)
+
+        buttonCalc = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, command=lambda: controller.show_frame(Tabs2dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, command=calculate)
+
+        labelMain.pack()
+        sisi.place(x=245, y=20)
+        num1.pack()
+        area.place(x=245, y=50)
+        circum.place(x=245, y=80)
+        
+        resArea.place(x=375, y=50)
+        resCircum.place(x=377,y=80)
+
+        buttonRes.place(x=325, y=125)
+        buttonCalc.place(x=325,y=300)
 
 class Calculator(tk.Frame):
     def __init__(self, parent, controller):
@@ -27,13 +64,12 @@ class Calculator(tk.Frame):
         button3d.pack()
         buttonBackMain.pack()
 
-
 class Tabs2dimension(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
         label2d = tk.Label(self, text="Choose 2 dimensional shapes")
-        buttonSquare = tk.Button(self, text="Square",width=20,height=4)
+        buttonSquare = tk.Button(self, text="Square",width=20,height=4,command=lambda: controller.show_frame(Square))
         buttonRectangle = tk.Button(self, text="Rectangle",width=20,height=4)
         buttonTriangle = tk.Button(self, text="Triangle",width=20,height=4)
         buttonCircle = tk.Button(self, text="Circle",width=20,height=4)
@@ -77,7 +113,6 @@ class ThirdPage(tk.Frame):
         Button = tk.Button(self, text="Back", font=("Arial", 15), command=lambda: controller.show_frame(Calculator))
         Button.place(x=100, y=450)
 
-
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -85,12 +120,11 @@ class Application(tk.Tk):
         # creating a window
         window = tk.Frame(self)
         window.pack()
-
         window.grid_rowconfigure(0, minsize=500)
         window.grid_columnconfigure(0, minsize=800)
 
         self.frames = {}
-        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage):
+        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -103,5 +137,5 @@ class Application(tk.Tk):
         self.title("Geometry calculator")
 
 app = Application()
-app.maxsize(800, 500)
+# app.maxsize(800, 500)
 app.mainloop()
