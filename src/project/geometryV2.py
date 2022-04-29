@@ -1,5 +1,3 @@
-from email.mime import image
-from PIL import ImageTk,Image
 import math
 import tkinter as tk
 
@@ -127,6 +125,8 @@ class Triangle(tk.Frame):
                 resCircum.config(text=result2)
             except: # if the code above is there an error then run except:
                 labelError.config(text="something went wrong",fg="red")
+                resArea.config(text="")
+                resCircum.config(text="")
             else: # if the code above not error then run else:
                 labelError.config(text="")
 
@@ -242,8 +242,8 @@ class Rhombus(tk.Frame):
         resArea = tk.Label(self, font=("helvetica",15))
         resCircum = tk.Label(self, font=("helvetica",15))
 
-        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, command=lambda: controller.show_frame(Tabs2dimension), font=("helvetica",10))
-        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, command=calculate, font=("helvetica",10))
+        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, command=lambda: controller.show_frame(Tabs2dimension), font=("helvetica",12))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, command=calculate, font=("helvetica",12))
 
         labelRhombus.pack()
         labelDiagonal1.place(x=220,y=45)
@@ -268,36 +268,243 @@ class Cube(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         def calculate():
-            var = float(side.get())
-            result1 = var * var * var
-            result2 = 6 * var**2
-            resArea.config(text=result1)
-            resCircum.config(text=result2)
+            try:
+                var = float(side.get())
+                result1 = var * var * var
+                result2 = 6 * var**2
+                resVolume.config(text=result1)
+                resSurface.config(text=result2)
+            except: # if the code above is there an error then run except:
+                labelError.config(text="something went wrong",fg="red")
+                resVolume.config(text="")
+                resSurface.config(text="")
+            else: # if the code above not error then run else:
+                labelError.config(text="")
 
         labelCube = tk.Label(self, text="Cube Calculator", font=("helvetica",25))
-        labelSide = tk.Label(self, text="Input Side legth      ", font=("helvetica",15))
+        labelSide = tk.Label(self, text="Input Side length      ", font=("helvetica",15))
         side = tk.Entry(self,font=("helvetica",15))
-        labelArea = tk.Label(self, text="Volume                 :", font=("helvetica",15))
-        labelCircum = tk.Label(self, text="Surface Area        :", font=("helvetica",15))
-        resArea = tk.Label(self,font=("helvetica",15))
-        resCircum = tk.Label(self,font=("helvetica",15))
+        labelVolume = tk.Label(self, text="Volume                 :", font=("helvetica",15))
+        labelSurface = tk.Label(self, text="Surface Area        :", font=("helvetica",15))
+        resVolume = tk.Label(self,font=("helvetica",15))
+        resSurface = tk.Label(self,font=("helvetica",15))
+        labelError = tk.Label(self, font=("helvetica",15))
 
-        buttonBack = tk.Button(self, text="Back to 3 dimension page",width=20,height=4, font=("helvetica",10), command=lambda: controller.show_frame(Tabs3dimension))
-        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",10),command=calculate)
+        buttonBack = tk.Button(self, text="Back to 3 dimension page",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Tabs3dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",12),command=calculate)
 
         labelCube.pack()
         labelSide.place(x=200, y=37)
         side.place(x=382, y=39)
-        labelArea.place(x=200, y=70)
-        labelCircum.place(x=200, y=100)
+        labelVolume.place(x=200, y=70)
+        labelSurface.place(x=200, y=100)
         
-        resArea.place(x=382, y=70)
-        resCircum.place(x=381,y=100)
+        resVolume.place(x=382, y=70)
+        resSurface.place(x=381,y=100)
+
+        labelError.place(x=315,y=300)
+
+        buttonRes.place(x=325, y=165)
+        buttonBack.place(x=325,y=400)
+    
+class Cuboids(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def calculate():
+            try:
+                var1 = float(length.get())
+                var2 = float(width.get())
+                var3 = float(height.get())
+                result1 = var1 * var2 * var3
+                result2 = 2*((var1*var2)+(var1*var3)+(var2*var3))
+                resVolume.config(text=result1)
+                resSurface.config(text=result2)
+            except: # if the code above is there an error then run except:
+                labelError.config(text="something went wrong",fg="red")
+                resVolume.config(text="")
+                resSurface.config(text="")
+            else: # if the code above not error then run else:
+                labelError.config(text="")
+
+        labelCube = tk.Label(self, text="Cuboids Calculator", font=("helvetica",25))
+        labelLength = tk.Label(self, text="Input Length      ", font=("helvetica",15))
+        labelWidth = tk.Label(self, text="Input Width      ", font=("helvetica",15))
+        labelHeight = tk.Label(self, text="Input Height      ", font=("helvetica",15))
+        length = tk.Entry(self,font=("helvetica",15))
+        width = tk.Entry(self,font=("helvetica",15))
+        height = tk.Entry(self,font=("helvetica",15))
+        labelVolume = tk.Label(self, text="Volume                 :", font=("helvetica",15))
+        labelSurface = tk.Label(self, text="Surface Area        :", font=("helvetica",15))
+        resVolume = tk.Label(self,font=("helvetica",15))
+        resSurface = tk.Label(self,font=("helvetica",15))
+        labelError = tk.Label(self, font=("helvetica",15))
+
+        buttonBack = tk.Button(self, text="Back to 3 dimension page",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Tabs3dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",12),command=calculate)
+
+        labelCube.pack()
+        labelLength.place(x=200, y=37)
+        labelWidth.place(x=200, y=65)
+        labelHeight.place(x=200, y=93)
+        length.place(x=382, y=37)
+        width.place(x=382, y=65)
+        height.place(x=382, y=93)
+        labelVolume.place(x=200, y=121)
+        labelSurface.place(x=200, y=149)
+        
+        resVolume.place(x=382, y=121)
+        resSurface.place(x=381,y=149)
+
+        labelError.place(x=315,y=300)
+
+        buttonRes.place(x=325, y=180)
+        buttonBack.place(x=325,y=400)
+
+class Ball(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def calculate():
+            try:
+                var = float(radius.get())
+                result1 = 4 * (22/7 * var**3)/3
+                result2 = 4 * 22/7 * var**2
+                resVolume.config(text=result1)
+                resSurface.config(text=result2)
+            except: # if the code above is there an error then run except:
+                labelError.config(text="something went wrong",fg="red")
+                resVolume.config(text="")
+                resSurface.config(text="")
+            else: # if the code above not error then run else:
+                labelError.config(text="")
+
+        labelBall = tk.Label(self, text="Ball Calculator", font=("helvetica",25))
+        labelRadius = tk.Label(self, text="Input Radius length      ", font=("helvetica",15))
+        radius = tk.Entry(self,font=("helvetica",15))
+        labelVolume = tk.Label(self, text="Volume                 :", font=("helvetica",15))
+        labelSurface = tk.Label(self, text="Surface Area        :", font=("helvetica",15))
+        resVolume = tk.Label(self,font=("helvetica",15))
+        resSurface = tk.Label(self,font=("helvetica",15))
+        labelError = tk.Label(self, font=("helvetica",15))
+
+        buttonBack = tk.Button(self, text="Back to 3 dimension page",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Tabs3dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",12),command=calculate)
+
+        labelBall.pack()
+        labelRadius.place(x=200, y=37)
+        radius.place(x=382, y=39)
+        labelVolume.place(x=200, y=70)
+        labelSurface.place(x=200, y=100)
+        
+        resVolume.place(x=382, y=70)
+        resSurface.place(x=381,y=100)
+
+        labelError.place(x=315,y=300)
 
         buttonRes.place(x=325, y=165)
         buttonBack.place(x=325,y=400)
 
-         
+class Cone(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def calculate():
+            try:
+                var1 = float(radius.get())
+                var2 = float(height.get())
+                result1 = ((22/7 * var1**2)*var2)/3
+                hypotenusa = math.sqrt(var1**2 + var2**2)
+                result2 = (22/7 * var1)*(var1+hypotenusa)
+                resVolume.config(text=result1)
+                resSurface.config(text=result2)
+            except: # if the code above is there an error then run except:
+                labelError.config(text="something went wrong",fg="red")
+                resVolume.config(text="")
+                resSurface.config(text="")
+            else: # if the code above not error then run else:
+                labelError.config(text="")
+
+        labelBall = tk.Label(self, text="Cone Calculator", font=("helvetica",25))
+        labelRadius = tk.Label(self, text="Input Radius", font=("helvetica",15))
+        labelHeight = tk.Label(self, text="Input Height", font=("helvetica",15))
+        radius = tk.Entry(self,font=("helvetica",15))
+        height = tk.Entry(self,font=("helvetica",15))
+        labelVolume = tk.Label(self, text="Volume                 :", font=("helvetica",15))
+        labelSurface = tk.Label(self, text="Surface Area        :", font=("helvetica",15))
+        resVolume = tk.Label(self,font=("helvetica",15))
+        resSurface = tk.Label(self,font=("helvetica",15))
+        labelError = tk.Label(self, font=("helvetica",15))
+
+        buttonBack = tk.Button(self, text="Back to 3 dimension page",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Tabs3dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",12),command=calculate)
+
+        labelBall.pack()
+        labelRadius.place(x=200, y=37)
+        labelHeight.place(x=200, y=65)
+        radius.place(x=382, y=37)
+        height.place(x=382, y=65)
+        labelVolume.place(x=200, y=93)
+        labelSurface.place(x=200, y=121)
+        
+        resVolume.place(x=382, y=93)
+        resSurface.place(x=381,y=121)
+
+        labelError.place(x=315,y=300)
+
+        buttonRes.place(x=325, y=165)
+        buttonBack.place(x=325,y=400)
+
+class Pyramids(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def calculate():
+            try:
+                var1 = float(side.get())
+                var2 = float(height.get())
+                result1 = 1/3 * var1**2 * var2
+                slant = math.sqrt((var1**2)/4 + (var2**2))
+                result2 = var1**2 + 4*(0.5 * var1 * slant)
+                resVolume.config(text=result1)
+                resSurface.config(text=result2)
+            except: # if the code above is there an error then run except:
+                labelError.config(text="something went wrong",fg="red")
+                resVolume.config(text="")
+                resSurface.config(text="")
+            else: # if the code above not error then run else:
+                labelError.config(text="")
+
+        labelPyramids = tk.Label(self, text="Pyramids Calculator", font=("helvetica",25))
+        labelSide = tk.Label(self, text="Input Side", font=("helvetica",15))
+        labelHeight = tk.Label(self, text="Input Height", font=("helvetica",15))
+        side = tk.Entry(self,font=("helvetica",15))
+        height = tk.Entry(self,font=("helvetica",15))
+        labelVolume = tk.Label(self, text="Volume                 :", font=("helvetica",15))
+        labelSurface = tk.Label(self, text="Surface Area        :", font=("helvetica",15))
+        resVolume = tk.Label(self,font=("helvetica",15))
+        resSurface = tk.Label(self,font=("helvetica",15))
+        labelError = tk.Label(self, font=("helvetica",15))
+
+        buttonBack = tk.Button(self, text="Back to 3 dimension page",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Tabs3dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",12),command=calculate)
+
+        labelPyramids.pack()
+        labelSide.place(x=200, y=37)
+        labelHeight.place(x=200, y=65)
+        side.place(x=382, y=37)
+        height.place(x=382, y=65)
+        labelVolume.place(x=200, y=93)
+        labelSurface.place(x=200, y=121)
+        
+        resVolume.place(x=382, y=93)
+        resSurface.place(x=381,y=121)
+
+        labelError.place(x=315,y=300)
+
+        buttonRes.place(x=325, y=165)
+        buttonBack.place(x=325,y=400)
+
 class Calculator(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -337,10 +544,10 @@ class Tabs3dimension(tk.Frame):
 
         label3d = tk.Label(self, text="Choose 3 dimensional shapes", font=("helvetica",25))
         buttonCube = tk.Button(self, text="Cube",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Cube))
-        buttonCuboids = tk.Button(self, text="Cuboids",width=20,height=4, font=("helvetica",12))
-        buttonBall = tk.Button(self, text="Ball",width=20,height=4, font=("helvetica",12))
-        buttonCone = tk.Button(self, text="Cone",width=20,height=4, font=("helvetica",12))
-        buttonPyramids = tk.Button(self, text="Pyramids",width=20,height=4, font=("helvetica",12))
+        buttonCuboids = tk.Button(self, text="Cuboids",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Cuboids))
+        buttonBall = tk.Button(self, text="Ball",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Ball))
+        buttonCone = tk.Button(self, text="Cone",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Cone))
+        buttonPyramids = tk.Button(self, text="Pyramids",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Pyramids))
         buttonBackCalc2 = tk.Button(self, text="Back to Calculator menu",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Calculator))
         label3d.pack()
         buttonCube.place(x=150,y=50)
@@ -372,7 +579,7 @@ class Application(tk.Tk):
         window.grid_columnconfigure(0, minsize=800)
 
         self.frames = {}
-        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square, Rectangle, Triangle, Circle, Rhombus, Cube):
+        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square, Rectangle, Triangle, Circle, Rhombus, Cube, Cuboids, Ball, Cone, Pyramids):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
