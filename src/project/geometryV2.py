@@ -27,8 +27,8 @@ class Square(tk.Frame):
                 result2 = var * 4
                 resArea.config(text=result1)
                 resCircum.config(text=result2)
-            except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+            except Exception as err: # if the code above is there an error then run except:
+                labelError.config(text="Something went wrong",fg="red")
                 resArea.config(text="")
                 resCircum.config(text="")
             else: # if the code above not error then run else:
@@ -74,7 +74,7 @@ class Rectangle(tk.Frame):
                 resArea.config(text=result1)
                 resCircum.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resArea.config(text="")
                 resCircum.config(text="")
             else: # if the code above not error then run else:
@@ -124,7 +124,7 @@ class Triangle(tk.Frame):
                 resArea.config(text=result1)
                 resCircum.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resArea.config(text="")
                 resCircum.config(text="")
             else: # if the code above not error then run else:
@@ -174,7 +174,7 @@ class Circle(tk.Frame):
                 resArea.config(text=result1)
                 resCircum.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resArea.config(text="")
                 resCircum.config(text="")
             else: # if the code above not error then run else:
@@ -222,7 +222,7 @@ class Rhombus(tk.Frame):
                 resArea.config(text=result1)
                 resCircum.config(text=result2)
             except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resArea.config(text="")
                 resCircum.config(text="")
             else:
@@ -275,7 +275,7 @@ class Cube(tk.Frame):
                 resVolume.config(text=result1)
                 resSurface.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resVolume.config(text="")
                 resSurface.config(text="")
             else: # if the code above not error then run else:
@@ -321,7 +321,7 @@ class Cuboids(tk.Frame):
                 resVolume.config(text=result1)
                 resSurface.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resVolume.config(text="")
                 resSurface.config(text="")
             else: # if the code above not error then run else:
@@ -373,7 +373,7 @@ class Ball(tk.Frame):
                 resVolume.config(text=result1)
                 resSurface.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resVolume.config(text="")
                 resSurface.config(text="")
             else: # if the code above not error then run else:
@@ -419,7 +419,7 @@ class Cone(tk.Frame):
                 resVolume.config(text=result1)
                 resSurface.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resVolume.config(text="")
                 resSurface.config(text="")
             else: # if the code above not error then run else:
@@ -469,7 +469,7 @@ class Pyramids(tk.Frame):
                 resVolume.config(text=result1)
                 resSurface.config(text=result2)
             except: # if the code above is there an error then run except:
-                labelError.config(text="something went wrong",fg="red")
+                labelError.config(text="Something went wrong",fg="red")
                 resVolume.config(text="")
                 resSurface.config(text="")
             else: # if the code above not error then run else:
