@@ -1,3 +1,5 @@
+from email.mime import image
+from PIL import ImageTk,Image
 import math
 import tkinter as tk
 
@@ -7,7 +9,7 @@ class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        labelMain = tk.Label(self, text="Main Menu",font=("Consolas",25))
+        labelMain = tk.Label(self, text="Main Menu",font=("helvetica",25))
         buttonCalc = tk.Button(self, text="Calculator",width=20,height=4,font=("helvetica",15), command=lambda: controller.show_frame(Calculator))
         buttonFormula = tk.Button(self, text="Formula",width=20,height=4,font=("helvetica",15))
         buttonGames = tk.Button(self, text="Games",width=20,height=4,font=("helvetica",15))
@@ -21,11 +23,18 @@ class Square(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         def calculate():
-            var = float(side.get())
-            result1 = var ** 3
-            result2 = var * 4
-            resArea.config(text=result1)
-            resCircum.config(text=result2)
+            try:
+                var = float(side.get())
+                result1 = var * var
+                result2 = var * 4
+                resArea.config(text=result1)
+                resCircum.config(text=result2)
+            except: # if the code above is there an error then run except:
+                labelError.config(text="something went wrong",fg="red")
+                resArea.config(text="")
+                resCircum.config(text="")
+            else: # if the code above not error then run else:
+                labelError.config(text="")
 
         labelSquare = tk.Label(self, text="Square Calculator", font=("helvetica",25))
         labelSide = tk.Label(self, text="Input Side legth      :", font=("helvetica",15))
@@ -34,9 +43,10 @@ class Square(tk.Frame):
         labelCircum = tk.Label(self, text="Circumfence leghth :", font=("helvetica",15))
         resArea = tk.Label(self,font=("helvetica",15))
         resCircum = tk.Label(self,font=("helvetica",15))
+        labelError = tk.Label(self, font=("helvetica",15))
 
-        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, font=("helvetica",10), command=lambda: controller.show_frame(Tabs2dimension))
-        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",10), command=calculate)
+        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Tabs2dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",12), command=calculate)
 
         labelSquare.pack()
         labelSide.place(x=200, y=37)
@@ -46,6 +56,8 @@ class Square(tk.Frame):
         
         resArea.place(x=382, y=70)
         resCircum.place(x=381,y=100)
+
+        labelError.place(x=315,y=300)
 
         buttonRes.place(x=325, y=165)
         buttonBack.place(x=325,y=400)
@@ -65,6 +77,8 @@ class Rectangle(tk.Frame):
                 resCircum.config(text=result2)
             except: # if the code above is there an error then run except:
                 labelError.config(text="something went wrong",fg="red")
+                resArea.config(text="")
+                resCircum.config(text="")
             else: # if the code above not error then run else:
                 labelError.config(text="")
 
@@ -129,8 +143,8 @@ class Triangle(tk.Frame):
         resArea = tk.Label(self, font=("helvetica",15))
         resCircum = tk.Label(self, font=("helvetica",15))
 
-        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, command=lambda: controller.show_frame(Tabs2dimension), font=("helvetica",10))
-        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, command=calculate, font=("helvetica",10))
+        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, command=lambda: controller.show_frame(Tabs2dimension), font=("helvetica",12))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, command=calculate, font=("helvetica",12))
 
         labelTriangle.pack()
         labelBased.place(x=220,y=45)
@@ -153,23 +167,32 @@ class Circle(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         def calculate():
-            var = float(radius.get())
-            result1 = 22/7 * var  * var
-            result2 = 2 * 22/7 * var
-            resArea.config(text=result1)
-            resCircum.config(text=result2)
+            try:
+                var = float(radius.get())
+                result1 = 22/7 * var  * var
+                result2 = 2 * 22/7 * var
+                resArea.config(text=result1)
+                resCircum.config(text=result2)
+            except: # if the code above is there an error then run except:
+                labelError.config(text="something went wrong",fg="red")
+                resArea.config(text="")
+                resCircum.config(text="")
+            else: # if the code above not error then run else:
+                labelError.config(text="")
+
 
         labelCircle = tk.Label(self, text="Circle calculator", font=("helvetica",25))
         labelRadius = tk.Label(self, text="Input Radius: ", font=("helvetica", 15))
         radius = tk.Entry(self, font=("helvetica", 15))
+        labelError = tk.Label(self, font=("helvetica",15))
 
         labelArea = tk.Label(self, text="Area: ", font=("helvetica", 15))
         labelCircum = tk.Label(self, text="Circumfence length: ", font=("helvetica",15))
         resArea = tk.Label(self, font=("helvetica",15))
         resCircum = tk.Label(self, font=("helvetica",15))
 
-        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, command=lambda: controller.show_frame(Tabs2dimension), font=("helvetica",10))
-        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, command=calculate, font=("helvetica",10))
+        buttonBack = tk.Button(self, text="Back to 2 dimension page",width=20,height=4, command=lambda: controller.show_frame(Tabs2dimension), font=("helvetica",12))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, command=calculate, font=("helvetica",12))
 
         labelCircle.pack()
         labelRadius.place(x=220,y=45)
@@ -179,8 +202,10 @@ class Circle(tk.Frame):
 
         resArea.place(x=400, y=70)
         resCircum.place(x=400,y=100)
+
+        labelError.place(x=315,y=300)
         
-        buttonRes.place(x=325, y=250)
+        buttonRes.place(x=325, y=200)
         buttonBack.place(x=325,y=400) 
 
 class Rhombus(tk.Frame):
@@ -198,6 +223,8 @@ class Rhombus(tk.Frame):
                 resCircum.config(text=result2)
             except:
                 labelError.config(text="something went wrong",fg="red")
+                resArea.config(text="")
+                resCircum.config(text="")
             else:
                 labelError.config(text="")
 
@@ -235,6 +262,41 @@ class Rhombus(tk.Frame):
 
         buttonRes.place(x=325, y=250)
         buttonBack.place(x=325,y=400)
+
+class Cube(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def calculate():
+            var = float(side.get())
+            result1 = var * var * var
+            result2 = 6 * var**2
+            resArea.config(text=result1)
+            resCircum.config(text=result2)
+
+        labelCube = tk.Label(self, text="Cube Calculator", font=("helvetica",25))
+        labelSide = tk.Label(self, text="Input Side legth      ", font=("helvetica",15))
+        side = tk.Entry(self,font=("helvetica",15))
+        labelArea = tk.Label(self, text="Volume                 :", font=("helvetica",15))
+        labelCircum = tk.Label(self, text="Surface Area        :", font=("helvetica",15))
+        resArea = tk.Label(self,font=("helvetica",15))
+        resCircum = tk.Label(self,font=("helvetica",15))
+
+        buttonBack = tk.Button(self, text="Back to 3 dimension page",width=20,height=4, font=("helvetica",10), command=lambda: controller.show_frame(Tabs3dimension))
+        buttonRes = tk.Button(self,text="Calculate",width=20,height=4, font=("helvetica",10),command=calculate)
+
+        labelCube.pack()
+        labelSide.place(x=200, y=37)
+        side.place(x=382, y=39)
+        labelArea.place(x=200, y=70)
+        labelCircum.place(x=200, y=100)
+        
+        resArea.place(x=382, y=70)
+        resCircum.place(x=381,y=100)
+
+        buttonRes.place(x=325, y=165)
+        buttonBack.place(x=325,y=400)
+
          
 class Calculator(tk.Frame):
     def __init__(self, parent, controller):
@@ -274,7 +336,7 @@ class Tabs3dimension(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         label3d = tk.Label(self, text="Choose 3 dimensional shapes", font=("helvetica",25))
-        buttonCube = tk.Button(self, text="Cube",width=20,height=4, font=("helvetica",12))
+        buttonCube = tk.Button(self, text="Cube",width=20,height=4, font=("helvetica",12), command=lambda: controller.show_frame(Cube))
         buttonCuboids = tk.Button(self, text="Cuboids",width=20,height=4, font=("helvetica",12))
         buttonBall = tk.Button(self, text="Ball",width=20,height=4, font=("helvetica",12))
         buttonCone = tk.Button(self, text="Cone",width=20,height=4, font=("helvetica",12))
@@ -310,7 +372,7 @@ class Application(tk.Tk):
         window.grid_columnconfigure(0, minsize=800)
 
         self.frames = {}
-        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square, Rectangle, Triangle, Circle, Rhombus):
+        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square, Rectangle, Triangle, Circle, Rhombus, Cube):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
