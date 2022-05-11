@@ -1,5 +1,6 @@
 import math
 import tkinter as tk
+# from PIL import ImageTk, Image
 
 # koordinat tengah x = 350, y = 200
 
@@ -9,7 +10,7 @@ class MainMenu(tk.Frame):
 
         labelMain = tk.Label(self, text="Main Menu",font=("helvetica",25))
         buttonCalc = tk.Button(self, text="Calculator",width=20,height=4,font=("helvetica",15), command=lambda: controller.show_frame(Calculator))
-        buttonFormula = tk.Button(self, text="Formula",width=20,height=4,font=("helvetica",15))
+        buttonFormula = tk.Button(self, text="Formula",width=20,height=4,font=("helvetica",15), command=lambda: controller.show_frame(Formula))
         buttonGames = tk.Button(self, text="Games",width=20,height=4,font=("helvetica",15))
         labelMain.pack()
         buttonCalc.pack()
@@ -63,7 +64,6 @@ class Square(tk.Frame):
 class Rectangle(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        # self.configure(bg="cyan")
 
         def calculate():
             try: # run the code
@@ -519,6 +519,220 @@ class Calculator(tk.Frame):
         button3d.pack()
         buttonBackMain.pack()
 
+class Formula(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFormula = tk.Label(self, text="Choose Geometry",font=("helvetica",25))
+        # 2 dimension shapes
+        buttonSquare = tk.Button(self, text="Square",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Fsquare))
+        buttonRectangle = tk.Button(self, text="Rectangle",width=20,height=3,font=("helvetica",12), command=lambda: controller.show_frame(Frectangle))
+        buttonTriangle = tk.Button(self, text="Triangle",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Ftriangle))
+        buttonCircle = tk.Button(self, text="Circle",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Fcircle))
+        buttonRhombus = tk.Button(self, text="Rhombus",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Frhombus))
+        
+        # 3 dimension shapes
+        buttonCube = tk.Button(self, text="Cube",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Fcube))
+        buttonCuboids = tk.Button(self, text="Cuboids",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Fcuboids))
+        buttonBall = tk.Button(self, text="Ball",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Fball))
+        buttonCone = tk.Button(self, text="Cone",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Fcone))
+        buttonPyramids = tk.Button(self, text="Pyramids",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Fpyramids))
+
+        buttonBackMain = tk.Button(self, text="Back to main menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(MainMenu))
+        labelFormula.pack()
+        # 2 diemsionshapes
+        buttonSquare.place(x=200,y=50)
+        buttonRectangle.place(x=200,y=125)
+        buttonTriangle.place(x=200,y=200)
+        buttonCircle.place(x=200,y=275)
+        buttonRhombus.place(x=200,y=350)
+        # # 3 dimension shapes
+        buttonCube.place(x=400,y=50)
+        buttonCuboids.place(x=400,y=125)
+        buttonBall.place(x=400,y=200)
+        buttonCone.place(x=400,y=275)
+        buttonPyramids.place(x=400,y=350)
+
+        buttonBackMain.place(x=300,y=425)
+
+class Fsquare(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFsquare = tk.Label(self, text="Square Formula",font=("helvetica",25))
+        labelArea = tk.Label(self, text="Area = S x S",font=("helvetica",15))
+        labelCircumfence = tk.Label(self, text="Circumfence = S+S+S+S / 4S",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="S = Side",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFsquare.pack()
+        labelArea.place(x=300,y=50)
+        labelCircumfence.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+        
+class Frectangle(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFrectagle = tk.Label(self, text= "Rectangle Formula",font=("helvetica",25))
+        labelArea = tk.Label(self, text="Area = W x L",font=("helvetica",15))
+        labelCircumfence = tk.Label(self, text="Circumfence = 2W + 2L",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="W = Wide\n L = Length",font=("helvetica",15))
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFrectagle.pack()
+        labelArea.place(x=300,y=50)
+        labelCircumfence.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+     
+class Ftriangle (tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFtriangle = tk.Label(self, text= "Triangle Formula",font=("helvetica",25))
+        labelArea = tk.Label(self, text="Area = (B x H)/2",font=("helvetica",15))
+        labelCircumfence = tk.Label(self, text="Circumfence = A + B + C",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="B = Base\nH = Height\nA,B,C = Sides",font=("helvetica",15))
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFtriangle.pack()
+        labelArea.place (x=300,y=50)
+        labelCircumfence.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+
+class Fcircle(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFcircle = tk.Label(self, text= "Circle Formula",font=("helvetica",25))
+        labelArea = tk.Label(self, text="Area = π x r x r ",font=("helvetica",15))
+        labelCircumfence = tk.Label(self, text="Circumfence = 2πr / πd",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="π = Phi(22/7)\n r = Radius \n d = Diameter",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFcircle.pack()
+        labelArea.place (x=300,y=50)
+        labelCircumfence.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+        
+class Frhombus(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFrhombus = tk.Label(self, text= "Rhombus Formula",font=("helvetica",25))
+        labelArea = tk.Label(self, text="Area = (d1 x d2)/2 ",font=("helvetica",15))
+        labelCircumfence = tk.Label(self, text="Circumfence = 4S/S+S+S+S",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="d1 = Diagonal 1\n d2 = Diagonal 2 \n S = Side",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=10, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFrhombus.pack()
+        labelArea.place (x=300,y=50)
+        labelCircumfence.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+
+class Fcube(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFcube = tk.Label(self, text="Cube Formula",font=("helvetica",25))
+        labelVolume = tk.Label(self, text="Volume = S x S x S",font=("helvetica",15))
+        labelSurfaceArea = tk.Label(self, text="Surface Area = 6 x S x S",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="S = Side",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFcube.pack()
+        labelVolume.place(x=300,y=50)
+        labelSurfaceArea.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+        
+class Fcuboids(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFcuboids = tk.Label(self, text="Cuboids Formula",font=("helvetica",25))
+        labelVolume = tk.Label(self, text="Volume = L x W x H",font=("helvetica",15))
+        labelSurfaceArea = tk.Label(self, text="Surface Area = 2 x (L x W) + (L x H) + (W x H)",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="L = length\nW = Width\nH = Height",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFcuboids.pack()
+        labelVolume.place(x=300,y=50)
+        labelSurfaceArea.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+
+class Fball(tk.Frame): 
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFball = tk.Label(self, text="Cuboids Formula",font=("helvetica",25))
+        labelVolume = tk.Label(self, text="Volume = 4/3 x 22/7 x r x r x r",font=("helvetica",15))
+        labelSurfaceArea = tk.Label(self, text="Surface Area = 4 x 22/7 x r x r",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="r = Radius",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFball.pack()
+        labelVolume.place(x=300,y=50)
+        labelSurfaceArea.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+
+class Fcone(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFcone = tk.Label(self, text="Cone Formula",font=("helvetica",25))
+        labelVolume = tk.Label(self, text="Volume = (π x r x r x h)/3 ",font=("helvetica",15))
+        labelSurfaceArea = tk.Label(self, text="Surface Area = π x r x (r + s) ",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="π = Phi (22/7)\n r = Radius\n h = Height\n s = slant Height",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFcone.pack()
+        labelVolume.place(x=300,y=50)
+        labelSurfaceArea.place(x=300,y=100)
+        label_Legend.place(x=300, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+
+class Fpyramids(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        labelFpyramids = tk.Label(self, text="Pyramid Formula",font=("helvetica",25))
+        labelVolume = tk.Label(self, text="Volume = (a x a x h)/3 ",font=("helvetica",15))
+        labelSurfaceArea = tk.Label(self, text="Surface Area = A+(p x s)/2 ",font=("helvetica",15))
+        label_Legend = tk.Label(self, text="a = Side Lenght h = Height\n p = Perimeter Of Base A = Area Of Base\n s = Slant Height",font=("helvetica",15))
+
+        buttonBackMain = tk.Button(self, text="Back To Formula Menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Formula))
+
+        labelFpyramids.pack()
+        labelVolume.place(x=300,y=50)
+        labelSurfaceArea.place(x=300,y=100)
+        label_Legend.place(x=230, y=150)
+        
+        buttonBackMain.place(x=300,y=425)
+
 class Tabs2dimension(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -577,9 +791,12 @@ class Application(tk.Tk):
         window.pack()
         window.grid_rowconfigure(0, minsize=500)
         window.grid_columnconfigure(0, minsize=800)
+        # window.('-fullscreen',True)
+        
 
         self.frames = {}
-        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square, Rectangle, Triangle, Circle, Rhombus, Cube, Cuboids, Ball, Cone, Pyramids):
+        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square, Rectangle, Triangle, Circle, Rhombus, Cube
+        , Cuboids, Ball, Cone, Pyramids, Formula , Fsquare, Frectangle, Ftriangle, Fcircle, Frhombus, Fcube, Fcuboids, Fball, Fcone, Fpyramids):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
