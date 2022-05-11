@@ -4,6 +4,26 @@ import tkinter as tk
 
 # koordinat tengah x = 350, y = 200
 
+def regtxt():
+    global playerName, playerNoReg, playerAge, playerAddress, namefile
+    playerName = str(player_Name.get())
+    playerNoReg = str(player_NoReg.get())
+    playerAge = str(player_Age.get())
+    playerAddress = str(player_Address.get())
+    
+    namefile = playerName + playerNoReg
+    playerFile = open(namefile + ".txt", "a+")
+    playerFile.write("name: " + playerName +"\n"+ "No Registration: " + playerNoReg + "\n" + "Age: " + playerAge + "\n" + "Address: " + playerAddress + "\n")
+    # playerFile.close()
+
+def edittxt():
+    global res
+    res = res + 1
+    print(namefile + ".txt")
+    newPoin = open(namefile + ".txt", "a")
+    newPoin.write("Your point is: " + str(res) + "\n")
+    newPoin.close()
+
 class MainMenu(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -11,7 +31,7 @@ class MainMenu(tk.Frame):
         labelMain = tk.Label(self, text="Main Menu",font=("helvetica",25))
         buttonCalc = tk.Button(self, text="Calculator",width=20,height=4,font=("helvetica",15), command=lambda: controller.show_frame(Calculator))
         buttonFormula = tk.Button(self, text="Formula",width=20,height=4,font=("helvetica",15), command=lambda: controller.show_frame(Formula))
-        buttonGames = tk.Button(self, text="Games",width=20,height=4,font=("helvetica",15))
+        buttonGames = tk.Button(self, text="Games",width=20,height=4,font=("helvetica",15), command=lambda: controller.show_frame(Registration))
         labelMain.pack()
         buttonCalc.pack()
         buttonFormula.pack()
@@ -782,6 +802,254 @@ class ThirdPage(tk.Frame):
         Button = tk.Button(self, text="Back", font=("helvetiva", 15), command=lambda: controller.show_frame(Calculator))
         Button.place(x=100, y=450)
 
+class Registration(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        global player_Name, player_Age, player_NoReg, player_Address
+
+        def clearEntry():
+            player_Name.delete(0,'end')
+            player_Age.delete(0,'end')
+            player_NoReg.delete(0,'end')
+            player_Address.delete(0,'end')
+        
+        def resetPoin():
+            global res
+            res = int(0)
+
+        labelReg = tk.Label(self, text="Games Registration",font=("helvetica",25))
+        
+        labelName = tk.Label(self, text="Name",font=("helvetica",15))
+        labelAge = tk.Label(self, text="Age",font=("helvetica",15))
+        labelNoReg = tk.Label(self, text="No. Registration",font=("helvetica",15))
+        labelAddress = tk.Label(self, text="Address",font=("helvetica",15))
+        player_Name = tk.Entry(self,font=("helvetica",15))
+        player_Age = tk.Entry(self,font=("helvetica",15))
+        player_NoReg = tk.Entry(self,font=("helvetica",15))
+        player_Address = tk.Entry(self,font=("helvetica",15))
+        buttonBackMain = tk.Button(self, text="Back to main menu",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(MainMenu))
+        buttonLanjut = tk.Button(self, text="Next ->",width=20,height=3, font=("helvetica",12), command=lambda:[controller.show_frame(Question1), regtxt(), clearEntry(), resetPoin()])
+
+        labelReg.pack()
+        labelName.place(x=200,y=150)
+        labelAge.place(x=200,y=200)
+        labelNoReg.place(x=200,y=250)
+        labelAddress.place(x=200, y=300)
+        player_Name.place(x=400, y=150)
+        player_Age.place(x=400, y=200)
+        player_NoReg.place(x=400, y=250)
+        player_Address.place(x=400, y=300)
+        buttonBackMain.place(x=200, y=400)
+        buttonLanjut.place(x=400, y=400)
+
+class Question1(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def openTxt():
+            quest = open("soal1.txt", 'r')
+            a = quest.read()
+            
+            textSoal.insert(tk.END, a)
+            quest.close()
+
+        textSoal = tk.Text(self, width=40, height=10, font=("helvetica",15))
+        openBtn = tk.Button(self, text="See Question",width=20,height=3, font=("helvetica",12), command=openTxt)
+        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question2))
+        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda:[controller.show_frame(Question2), edittxt()])
+        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question2))
+        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question2))
+        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question2))
+        
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+        ansA.place(x=225,y=400)
+        ansB.place(x=300,y=400)
+        ansC.place(x=375,y=400)
+        ansD.place(x=450,y=400)
+        ansE.place(x=525,y=400)
+
+class Question2(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def openTxt():
+            quest = open("soal2.txt", 'r')
+            a = quest.read()
+            
+            textSoal.insert(tk.END, a)
+            quest.close()
+
+        textSoal = tk.Text(self, width=40, height=10, font=("helvetica",15))
+        openBtn = tk.Button(self, text="See Question",width=20,height=3, font=("helvetica",12), command=openTxt)
+        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question3))
+        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question3))
+        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question3))
+        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Question3), edittxt()])
+        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question3))
+        
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+        ansA.place(x=225,y=400)
+        ansB.place(x=300,y=400)
+        ansC.place(x=375,y=400)
+        ansD.place(x=450,y=400)
+        ansE.place(x=525,y=400)
+
+class Question3(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def openTxt():
+            quest = open("soal3.txt", 'r')
+            a = quest.read()
+            
+            textSoal.insert(tk.END, a)
+            quest.close()
+        
+        textSoal = tk.Text(self, width=40, height=10, font=("helvetica",15))
+        openBtn = tk.Button(self, text="See Question",width=20,height=3, font=("helvetica",12), command=openTxt)
+        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question4))
+        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question4))
+        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question4))
+        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Question4), edittxt()])
+        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question4))
+        
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+        ansA.place(x=225,y=400)
+        ansB.place(x=300,y=400)
+        ansC.place(x=375,y=400)
+        ansD.place(x=450,y=400)
+        ansE.place(x=525,y=400)
+
+class Question4(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def openTxt():
+            quest = open("soal4.txt", 'r')
+            a = quest.read()
+            
+            textSoal.insert(tk.END, a)
+            quest.close()
+        
+        textSoal = tk.Text(self, width=40, height=10, font=("helvetica",15))
+        openBtn = tk.Button(self, text="See Question",width=20,height=3, font=("helvetica",12), command=openTxt)
+        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question5))
+        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question5))
+        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question5))
+        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Question5), edittxt()])
+        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question5))
+        
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+        ansA.place(x=225,y=400)
+        ansB.place(x=300,y=400)
+        ansC.place(x=375,y=400)
+        ansD.place(x=450,y=400)
+        ansE.place(x=525,y=400)
+
+class Question5(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def openTxt():
+            quest = open("soal5.txt", 'r')
+            a = quest.read()
+            
+            textSoal.insert(tk.END, a)
+            quest.close()
+        
+        textSoal = tk.Text(self, width=40, height=10, font=("helvetica",15))
+        openBtn = tk.Button(self, text="See Question",width=20,height=3, font=("helvetica",12), command=openTxt)
+        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question6))
+        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question6))
+        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Question6), edittxt()])
+        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question6))
+        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Question6))
+        
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+        ansA.place(x=225,y=400)
+        ansB.place(x=300,y=400)
+        ansC.place(x=375,y=400)
+        ansD.place(x=450,y=400)
+        ansE.place(x=525,y=400)
+
+class Question6(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def openTxt():
+            quest = open("soal6.txt", 'r')
+            a = quest.read()
+            
+            textSoal.insert(tk.END, a)
+            quest.close()
+        
+        textSoal = tk.Text(self, width=40, height=10, font=("helvetica",15))
+        openBtn = tk.Button(self, text="See Question",width=20,height=3, font=("helvetica",12), command=openTxt)
+        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
+        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
+        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
+        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), edittxt()])
+        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
+        
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+
+        textSoal.pack(pady=20)
+        openBtn.pack(pady=20)
+        ansA.place(x=225,y=400)
+        ansB.place(x=300,y=400)
+        ansC.place(x=375,y=400)
+        ansD.place(x=450,y=400)
+        ansE.place(x=525,y=400)
+
+class Results(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        def openTxt():
+            print(namefile + ".txt")
+            newPlayerFile = open(namefile + ".txt", "r")
+            abc = newPlayerFile.read()
+            # newPlayerFile.write("name: " + playerName +"\n"+ "No Registration: " + playerNoReg + "\n" + "Age: " + playerAge + "\n" + "Address: " + playerAddress + "\n" + "Your point is: " + str(res) + "\n")   
+            
+            textResult.insert(tk.END , abc)
+            newPlayerFile.close()
+        
+        def clearResult():
+            textResult.delete("1.0","end")
+
+        textResult = tk.Text(self, width=40, height=10, font=("helvetica",15))
+        openBtn = tk.Button(self, text="See Results",width=20,height=3, font=("helvetica",12), command=openTxt)
+        buttonBackMain = tk.Button(self, text="Back to main menu",width=20,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(MainMenu), clearResult()])
+
+        buttonBackMain.place(x=200, y=400)  
+        textResult.pack(pady=20)
+        openBtn.pack(pady=20)
+
+
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -795,8 +1063,10 @@ class Application(tk.Tk):
         
 
         self.frames = {}
-        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage, Square, Rectangle, Triangle, Circle, Rhombus, Cube
-        , Cuboids, Ball, Cone, Pyramids, Formula , Fsquare, Frectangle, Ftriangle, Fcircle, Frhombus, Fcube, Fcuboids, Fball, Fcone, Fpyramids):
+        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage,
+                Square, Rectangle, Triangle, Circle, Rhombus, Cube, Cuboids, Ball, Cone, Pyramids,
+                Formula, Fsquare, Frectangle, Ftriangle, Fcircle, Frhombus, Fcube, Fcuboids, Fball, Fcone, Fpyramids,
+                Registration, Question1, Question2, Question3, Question4, Question5, Question6, Results):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
