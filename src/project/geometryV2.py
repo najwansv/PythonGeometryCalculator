@@ -14,12 +14,12 @@ def regtxt():
     namefile = playerName + playerNoReg
     playerFile = open(namefile + ".txt", "a+")
     playerFile.write("="*5 + "Players" + "="*5 + "\nname: " + playerName +"\nNo Registration: " + playerNoReg + "\nAge: " + playerAge + "\nAddress: " + playerAddress + "\n")
-    # playerFile.close()
 
 def updatePoint():
     global res
     res = res + 1
 
+def updateFile():
     newPoin = open(namefile + ".txt", "a+")
     newPoin.write("Your point is: " + str(res) + "\n")
     newPoin.close()
@@ -1008,7 +1008,7 @@ class Question6(tk.Frame):
         ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
         ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
         ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
-        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), updatePoint()])
+        ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), updatePoint(), updateFile()])
         ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
         
         labelQuest.pack()
