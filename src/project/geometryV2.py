@@ -20,7 +20,7 @@ def updatePoint():
     global res
     res = res + 1
 
-    newPoin = open(namefile + ".txt", "a")
+    newPoin = open(namefile + ".txt", "a+")
     newPoin.write("Your point is: " + str(res) + "\n")
     newPoin.close()
 
@@ -1044,16 +1044,6 @@ class Results(tk.Frame):
         textResult.pack(pady=20)
         openBtn.pack(pady=5)
 
-class updateLevel(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-
-        abc = tk.Label(self, text="level updated", width=40, height=10, font=("helvetica",15))
-        buttonBackMain = tk.Button(self, text="Next level",width=20,height=3, font=("helvetica",12), command=lambda: controller.show_frame(MainMenu))
-
-        buttonBackMain.place(x=300, y=400)  
-        abc.pack()
-
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -1070,7 +1060,7 @@ class Application(tk.Tk):
         for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage,
                 Square, Rectangle, Triangle, Circle, Rhombus, Cube, Cuboids, Ball, Cone, Pyramids,
                 Formula, Fsquare, Frectangle, Ftriangle, Fcircle, Frhombus, Fcube, Fcuboids, Fball, Fcone, Fpyramids,
-                Registration, Question1, Question2, Question3, Question4, Question5, Question6, Results, updateLevel):
+                Registration, Question1, Question2, Question3, Question4, Question5, Question6, Results):
             frame = F(window, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
