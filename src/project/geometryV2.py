@@ -991,11 +991,11 @@ class Question6(tk.Frame):
         labelQuest = tk.Label(self, text="Question 6", font=("helvetica",25))
         textSoal = tk.Text(self, width=40, height=10, font=("helvetica",15))
         openBtn = tk.Button(self, text="See Question",width=20,height=3, font=("helvetica",12), command=openTxt)
-        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
-        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
-        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
+        ansA = tk.Button(self, text="A",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), updateFile()])
+        ansB = tk.Button(self, text="B",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), updateFile()])
+        ansC = tk.Button(self, text="C",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), updateFile()])
         ansD = tk.Button(self, text="D",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), updatePoint(), updateFile()])
-        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: controller.show_frame(Results))
+        ansE = tk.Button(self, text="E",width=5,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(Results), updateFile()])
         
         labelQuest.pack()
         textSoal.pack(pady=20)
@@ -1022,10 +1022,12 @@ class Results(tk.Frame):
         def clearResult():
             textResult.delete("1.0","end")
 
+        labelQuest = tk.Label(self, text="Results", font=("helvetica",25))
         textResult = tk.Text(self,width=40, height=10, font=("helvetica",15))
         openBtn = tk.Button(self, text="See Results",width=20,height=3, font=("helvetica",12), command=openTxt)
         buttonBackMain = tk.Button(self, text="Back to main menu",width=20,height=3, font=("helvetica",12), command=lambda: [controller.show_frame(MainMenu), clearResult()])
 
+        labelQuest.pack()
         buttonBackMain.place(x=300, y=400)  
         textResult.pack(pady=20)
         openBtn.pack(pady=5)
@@ -1039,9 +1041,7 @@ class Application(tk.Tk):
         window.pack()
         window.grid_rowconfigure(0, minsize=500)
         window.grid_columnconfigure(0, minsize=800)
-        # window.('-fullscreen',True)
         
-
         self.frames = {}
         for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension,
                 Square, Rectangle, Triangle, Circle, Rhombus, Cube, Cuboids, Ball, Cone, Pyramids,
