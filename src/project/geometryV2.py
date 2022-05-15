@@ -1,8 +1,5 @@
 import math
 import tkinter as tk
-# from PIL import ImageTk, Image
-
-# koordinat tengah x = 350, y = 200
 
 def regtxt():
     global playerName, playerNoReg, playerAge, playerAddress, namefile
@@ -794,17 +791,6 @@ class Tabs3dimension(tk.Frame):
         buttonPyramids.place(x=450,y=150)
         buttonBackCalc2.place(x=450,y=250)
 
-class ThirdPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.configure(bg='Tomato')
-
-        Button = tk.Button(self, text="Home", font=("helvetiva", 15), command=lambda: controller.show_frame(MainMenu))
-        Button.place(x=650, y=450)
-
-        Button = tk.Button(self, text="Back", font=("helvetiva", 15), command=lambda: controller.show_frame(Calculator))
-        Button.place(x=100, y=450)
-
 class Registration(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -1057,7 +1043,7 @@ class Application(tk.Tk):
         
 
         self.frames = {}
-        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension, ThirdPage,
+        for F in (MainMenu, Calculator, Tabs2dimension, Tabs3dimension,
                 Square, Rectangle, Triangle, Circle, Rhombus, Cube, Cuboids, Ball, Cone, Pyramids,
                 Formula, Fsquare, Frectangle, Ftriangle, Fcircle, Frhombus, Fcube, Fcuboids, Fball, Fcone, Fpyramids,
                 Registration, Question1, Question2, Question3, Question4, Question5, Question6, Results):
